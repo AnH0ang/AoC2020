@@ -7,7 +7,7 @@ def parse_line(line: str) -> Tuple[int]:
     return r.groups()
 
 def word_has_number_of_chars(min_n: int, max_n: int, char: str, word: str) -> bool:
-    occurrences = len(re.findall(char, word))
+    occurrences = word.count(char)
     return (min_n <= occurrences) and (occurrences <= max_n)
 
 def word_has_one_char_at_index(index1: int, index2: int, char: str, word: str) -> bool:

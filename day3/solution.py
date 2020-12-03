@@ -1,6 +1,5 @@
-import re
 import functools
-from typing import Tuple, List
+from typing import List
 
 def main() -> None:
     tree_map: List[str] = []
@@ -10,8 +9,8 @@ def main() -> None:
     # solution 1
     tree_counter: int = 0
     for i, line in enumerate(tree_map):
-        idx: int = dx * 3
-        width : int = len(line)
+        idx: int = i * 3
+        width: int = len(line)
         if line[idx % width] == '#':
             tree_counter += 1
     print(tree_counter)
