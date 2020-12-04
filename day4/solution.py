@@ -5,18 +5,6 @@ REQUIRED_FIELDS: Set[str] = set(
     ['byr', 'ecl', 'eyr', 'hcl', 'hgt', 'iyr', 'pid'])
 
 
-def validate_byr(input: str) -> bool:
-    return (1920 <= int(input)) and (int(input) <= 2002)
-
-
-def validate_iyr(input: str) -> bool:
-    return (2010 <= int(input)) and (int(input) <= 2020)
-
-
-def validate_eyr(input: str) -> bool:
-    return (2020 <= int(input)) and (int(input) <= 2030)
-
-
 def validate_hgt(input: str) -> bool:
     if input.endswith("cm"):
         return (150 <= int(input[:-2])) and (int(input[:-2]) <= 193)
@@ -26,26 +14,14 @@ def validate_hgt(input: str) -> bool:
         return False
 
 
-def validate_hcl(input: str) -> bool:
-    return bool(re.match(r"^#[a-f0-9]{6}$", input))
-
-
-def validate_ecl(input: str) -> bool:
-    return input in ["amb", "blu", "brn", "gry", "grn", "hzl", "oth"]
-
-
-def validate_pid(input: str) -> bool:
-    return bool(re.match(r"^[a-f0-9]{9}$", input))
-
-
 VALIDATORS: Dict[str, Callable[[str], bool]] = {
-    "byr": validate_byr,
-    "iyr": validate_iyr,
-    "eyr": validate_eyr,
+    "byr": lambda input: (1920 <= int(input)) and (int(input) <= 2002),
+    "iyr": lambda input: (2010 <= int(input)) and (int(input) <= 2020),
+    "eyr": lambda input: (2020 <= int(input)) and (int(input) <= 2030),
     "hgt": validate_hgt,
-    "hcl": validate_hcl,
-    "ecl": validate_ecl,
-    "pid": validate_pid
+    "hcl": lambda input: bool(re.match(r"^#[a-f0-9]{6}$", input)),
+    "ecl": lambda input: input in ["amb", "blu", "brn", "gry", "grn", "hzl", "oth"],
+    "pid": lambda input: bool(re.match(r"^[a-f0-9]{9}$", input))
 }
 
 
