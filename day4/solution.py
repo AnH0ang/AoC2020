@@ -5,23 +5,14 @@ REQUIRED_FIELDS: Set[str] = set(
     ['byr', 'ecl', 'eyr', 'hcl', 'hgt', 'iyr', 'pid'])
 
 
-def validate_hgt(input: str) -> bool:
-    if input.endswith("cm"):
-        return (150 <= int(input[:-2]) <= 193)
-    elif input.endswith("in"):
-        return (59 <= int(input[:-2]) <= 76)
-    else:
-        return False
-
-
 VALIDATORS: Dict[str, Callable[[str], bool]] = {
-    "byr": lambda input: (1920 <= int(input)) and (int(input) <= 2002),
-    "iyr": lambda input: (2010 <= int(input)) and (int(input) <= 2020),
-    "eyr": lambda input: (2020 <= int(input)) and (int(input) <= 2030),
-    "hgt": validate_hgt,
+    "byr": lambda input: (1920 <= int(input) <= 2002),
+    "iyr": lambda input: (2010 <= int(input) <= 2020),
+    "eyr": lambda input: (2020 <= int(input) <= 2030),
+    "hgt": lambda input: bool(re.match(r"^(1[5-8][0-9]cm)|(19[0-3]cm)|(5[8-9]in)|(6[0-9]in)|(7[0-6]in)$", input)),
     "hcl": lambda input: bool(re.match(r"^#[a-f0-9]{6}$", input)),
     "ecl": lambda input: input in ["amb", "blu", "brn", "gry", "grn", "hzl", "oth"],
-    "pid": lambda input: bool(re.match(r"^[a-f0-9]{9}$", input))
+    "pid": lambda input: bool(re.match(r"^[a-f0-9]{9}$", input)),
 }
 
 
