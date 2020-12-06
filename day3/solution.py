@@ -26,7 +26,6 @@ def main() -> None:
             if line[idx % width] == '#':
                 tree_counter += 1
         tree_counter_list.append(tree_counter)
-    print(tree_counter_list)
     print(functools.reduce((lambda x, y: x * y), tree_counter_list))
 
 if __name__ == "__main__":

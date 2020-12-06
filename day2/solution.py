@@ -30,7 +30,8 @@ def main() -> None:
         if word_has_one_char_at_index(nb_1, nb_2, char, password):
             count_2 += 1
 
-    print(count_1, count_2)
+    print(count_1)
+    print(count_2)
 
 if __name__ == "__main__":
     main()
