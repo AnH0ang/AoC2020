@@ -23,6 +23,7 @@ class Starship1:
         2: np.array([-1, 0]),
         3: np.array([0, 1]),
     }
+
     def __init__(self) -> None:
         self.coordinate: ndarray = np.array([0, 0])
         self.direction: int = 0
@@ -48,6 +49,7 @@ class Starship1:
     @property
     def manhattan_distance(self) -> int:
         return np.sum(np.abs(self.coordinate))
+
 
 class Starship2:
     cardinal2vector: Dict[str, ndarray] = {
@@ -105,6 +107,7 @@ def main() -> None:
     for action, val in instructions:
         ship2.execute_command(action, val)
     print(ship2.manhattan_distance)
+
 
 if __name__ == "__main__":
     main()
